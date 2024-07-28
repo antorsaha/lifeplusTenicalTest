@@ -2,4 +2,17 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="primary_text">#191D31</color>
+    <color name="secondary_text">#A7A9B7</color>
+    <color name="border">#E5E7EB</color>
+    <color name="status_bar">#000000</color>
+    <color name="secondary_button">#222831</color>
+    <color name="secondary_button_bg">#F6F7F9</color>
+    <color name="inactive_button_bg">#9C9C9C</color>
+
+    <color name="primary_color">#005E8A</color>
+
+    <color name="text_color_white">#FFFFFFFF</color>
+
 </resources>
