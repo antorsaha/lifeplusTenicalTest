@@ -1,9 +1,12 @@
 package com.saha.lifeplustenicaltest.data.room
 
 import android.content.Context
+import android.util.Log
 import com.saha.lifeplustenicaltest.data.model.User
 
 object DatabaseHelper {
+    private const val TAG = "DatabaseHelper"
+
     private var initialized = false
     private var database: DatabaseDao? = null
 
@@ -16,7 +19,16 @@ object DatabaseHelper {
     }
 
     fun getUser(): User? {
-        return database?.getUser()?.value
+        if (database != null){
+            val data = database?.getUser()
+            Log.d(TAG, "getUser: $data")
+            return data
+        }else{
+            Log.d(TAG, "getUser: database is null")
+        }
+
+        return null
+
     }
 
     fun saveUser(user: User) {

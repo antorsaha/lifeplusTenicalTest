@@ -67,4 +67,6 @@ dependencies {
     implementation("androidx.room:room-runtime:$roomVersion")
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
     kapt("androidx.room:room-compiler:2.6.1")
+
+    implementation("io.michaelrocks:libphonenumber-android:8.13.35")
 }

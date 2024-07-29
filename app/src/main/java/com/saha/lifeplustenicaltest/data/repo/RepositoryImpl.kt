@@ -1,7 +1,11 @@
-package com.sikderithub.brightacademy.data.repo
+package com.saha.lifeplustenicaltest.data.repo
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.saha.lifeplustenicaltest.data.model.GenericResponse
+import com.saha.lifeplustenicaltest.data.model.User
 import com.saha.lifeplustenicaltest.data.network.MyApi
+import com.saha.lifeplustenicaltest.data.room.DatabaseHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -18,6 +22,15 @@ class RepositoryImpl(private val myApi: MyApi) : Repository {
         }
     }*/
 
+    override suspend fun saveUser(user: User) {
+        Log.d(TAG, "saveUser: ")
+        DatabaseHelper.saveUser(user)
+    }
+
+    override suspend fun getUser(): User? {
+        Log.d(TAG, "getUser: ")
+        return DatabaseHelper.getUser()
+    }
 
     private suspend fun <T : Any> executeSafely(
         block: suspend () -> Response<GenericResponse<T>>
@@ -40,4 +53,5 @@ class RepositoryImpl(private val myApi: MyApi) : Repository {
             GenericResponse(true, message())
         }
     }
+
 }

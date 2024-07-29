@@ -14,7 +14,7 @@ interface DatabaseDao {
     fun saveUser(user: User)
 
     @Query("SELECT * FROM users LIMIT 1")
-    fun getUser(): LiveData<User>
+    fun getUser(): User
 
     @Delete
     fun deleteUser(user: User)
