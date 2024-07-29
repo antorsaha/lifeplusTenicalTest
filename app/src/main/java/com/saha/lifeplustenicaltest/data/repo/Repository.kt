@@ -6,6 +6,6 @@ import com.saha.lifeplustenicaltest.data.model.User
 
 interface Repository {
 
-    suspend fun saveUser(user: User)
-    suspend fun getUser():User?
+    suspend fun saveUser(user: User): Boolean
+    suspend fun getUser(userName: String):User?
 }

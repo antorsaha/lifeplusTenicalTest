@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.saha.lifeplustenicaltest.data.repo.Repository
+import com.saha.lifeplustenicaltest.view.activity.auth.AuthViewModel
 import com.saha.lifeplustenicaltest.view.activity.main.MainViewModel
 
 class ViewModelInstanceHelper(
@@ -20,9 +21,9 @@ class ViewModelInstanceHelper(
                 application
             ) as T
 
-            /*modelClass.isAssignableFrom(RideForOtherTripMapViewModel::class.java) -> RideForOtherTripMapViewModel(
+            modelClass.isAssignableFrom(AuthViewModel::class.java) -> AuthViewModel(
                 repository, application
-            ) as T*/
+            ) as T
 
             else -> throw IllegalArgumentException("Unknown ViewModel class")
         }

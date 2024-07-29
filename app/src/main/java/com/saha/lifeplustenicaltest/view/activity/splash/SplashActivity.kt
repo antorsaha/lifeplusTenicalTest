@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
 import com.saha.lifeplustenicaltest.databinding.ActivitySplashBinding
+import com.saha.lifeplustenicaltest.view.activity.auth.LoginActivity
 import com.saha.lifeplustenicaltest.view.activity.main.MainActivity
 
 @SuppressLint("CustomSplashScreen")
@@ -19,11 +20,9 @@ class SplashActivity : AppCompatActivity() {
         override fun onTick(millisUntilFinished: Long) {
         }
 
-        // Callback function, fired
-        // when the time is up
         override fun onFinish() {
             //Intent to login Activity
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
             finish()
         }
     }

@@ -25,6 +25,7 @@ inline fun <reified T> Context.handleScreenState(
     errorAction: (String?) -> Unit = { s: String? ->
         Log.d("ScreenState", "handleScreenState: error")
 
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
         loadingDialog?.hide()
 
     },

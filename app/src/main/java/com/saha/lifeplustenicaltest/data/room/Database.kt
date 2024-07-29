@@ -9,9 +9,8 @@ import java.util.concurrent.Executors
 
 @androidx.room.Database(
     entities = [User::class],
-    version = 1,
+    version = 2,
     exportSchema = false,
-
     )
 abstract class Database : RoomDatabase() {
     abstract fun databaseDao(): DatabaseDao

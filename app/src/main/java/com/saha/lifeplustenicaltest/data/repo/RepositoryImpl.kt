@@ -1,7 +1,6 @@
 package com.saha.lifeplustenicaltest.data.repo
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.saha.lifeplustenicaltest.data.model.GenericResponse
 import com.saha.lifeplustenicaltest.data.model.User
 import com.saha.lifeplustenicaltest.data.network.MyApi
@@ -22,14 +21,18 @@ class RepositoryImpl(private val myApi: MyApi) : Repository {
         }
     }*/
 
-    override suspend fun saveUser(user: User) {
-        Log.d(TAG, "saveUser: ")
-        DatabaseHelper.saveUser(user)
+    override suspend fun saveUser(user: User): Boolean {
+        try {
+            DatabaseHelper.saveUser(user)
+            return true
+        } catch (_: Exception) {
+            return false
+        }
     }
 
-    override suspend fun getUser(): User? {
+    override suspend fun getUser(userName: String): User? {
         Log.d(TAG, "getUser: ")
-        return DatabaseHelper.getUser()
+        return DatabaseHelper.getUser(userName)
     }
 
     private suspend fun <T : Any> executeSafely(

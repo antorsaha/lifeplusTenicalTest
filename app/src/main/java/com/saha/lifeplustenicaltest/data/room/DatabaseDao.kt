@@ -13,8 +13,8 @@ interface DatabaseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveUser(user: User)
 
-    @Query("SELECT * FROM users LIMIT 1")
-    fun getUser(): User
+    @Query("SELECT * FROM users WHERE users.userName== userName LIMIT 1")
+    fun getUser(userName:String): User
 
     @Delete
     fun deleteUser(user: User)

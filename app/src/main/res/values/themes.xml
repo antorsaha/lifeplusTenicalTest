@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.LifePlusTenicalTest" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.LifePlusTechnicalTest" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_color</item>
+
     </style>
 
-    <style name="Theme.LifePlusTenicalTest" parent="Base.Theme.LifePlusTenicalTest" />
+    <style name="Theme.LifePlusTechnicalTest" parent="Base.Theme.LifePlusTechnicalTest" />
 </resources>

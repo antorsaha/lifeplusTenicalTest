@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+
+        <LinearLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="24dp"
+            tools:context=".view.activity.auth.LoginActivity">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/life_plus_logo" />
+
+            <LinearLayout
+                android:id="@+id/ll_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/name"
+                    layout="@layout/component_edit_text"
+                    app:hintText="@{@string/name}"
+                    app:icon='@{@drawable/icon_user}'
+                    app:labelText="@{@string/name}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/user_name"
+                    layout="@layout/component_edit_text"
+                    app:hintText="@{@string/username}"
+                    app:icon='@{@drawable/icon_user}'
+                    app:labelText="@{@string/username}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/password"
+                    layout="@layout/component_password_layout"
+                    app:hintText='@{"Ex.As123456"}'
+                    app:icon='@{@drawable/icon_lock}'
+                    app:labelText="@{@string/password}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/phone_number"
+                    layout="@layout/component_phone_number"
+                    app:hintText="@{@string/phone_number}"
+                    app:icon='@{@drawable/icon_phone}'
+                    app:labelText="@{@string/phone_number}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp">
+
+                <include
+                    android:id="@+id/btn_register"
+                    layout="@layout/component_primary_text_button"
+                    app:buttonText='@{@string/register}' />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

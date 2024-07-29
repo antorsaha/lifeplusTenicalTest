@@ -18,10 +18,9 @@ object DatabaseHelper {
         }
     }
 
-    fun getUser(): User? {
+    fun getUser(userName: String): User? {
         if (database != null){
-            val data = database?.getUser()
-            Log.d(TAG, "getUser: $data")
+            val data = database?.getUser(userName)
             return data
         }else{
             Log.d(TAG, "getUser: database is null")

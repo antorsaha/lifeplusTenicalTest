@@ -25,7 +25,7 @@ class MainViewModel(private val repository: Repository, application: Application
 
     fun getUser() {
         viewModelScope.launch(Dispatchers.IO) {
-            val userData = repository.getUser()
+            val userData = repository.getUser("")
 
             Log.d(TAG, "getUser: data $userData")
             userData?.let { data ->
