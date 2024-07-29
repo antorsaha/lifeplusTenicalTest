@@ -14,5 +14,6 @@
     <color name="primary_color">#005E8A</color>
 
     <color name="text_color_white">#FFFFFFFF</color>
+    <color name="background_color">#FFFFFF</color>
 
 </resources>
