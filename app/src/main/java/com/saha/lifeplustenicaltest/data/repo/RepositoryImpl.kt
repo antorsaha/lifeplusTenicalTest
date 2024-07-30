@@ -30,9 +30,9 @@ class RepositoryImpl(private val myApi: MyApi) : Repository {
         }
     }
 
-    override suspend fun getUser(userName: String): User? {
+    override suspend fun getUser(): User? {
         Log.d(TAG, "getUser: ")
-        return DatabaseHelper.getUser(userName)
+        return DatabaseHelper.getUser()
     }
 
     private suspend fun <T : Any> executeSafely(

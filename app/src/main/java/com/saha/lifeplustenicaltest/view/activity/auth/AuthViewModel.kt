@@ -1,6 +1,7 @@
 package com.saha.lifeplustenicaltest.view.activity.auth
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -12,6 +13,7 @@ import kotlinx.coroutines.launch
 
 class AuthViewModel(private val repository: Repository, application: Application) :
     AndroidViewModel(application) {
+    private val TAG = "AuthViewModel"
 
     val registerResponse: MutableLiveData<ScreenState<Boolean>> = MutableLiveData()
     val loginResponse: MutableLiveData<ScreenState<User>> = MutableLiveData()
@@ -42,10 +44,11 @@ class AuthViewModel(private val repository: Repository, application: Application
         }
     }
 
-    fun login(userName: String, password: String){
+    fun login(){
         viewModelScope.launch (Dispatchers.IO){
-            val data = repository.getUser(userName)
+            val data = repository.getUser()
 
+            Log.d(TAG, "login: data $data")
             if (data == null){
                 loginResponse.postValue(ScreenState.Error("User not found"))
             }else{

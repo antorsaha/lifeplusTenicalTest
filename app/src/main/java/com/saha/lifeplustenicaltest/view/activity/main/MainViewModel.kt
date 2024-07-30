@@ -23,7 +23,7 @@ class MainViewModel(private val repository: Repository, application: Application
         }
     }
 
-    fun getUser() {
+    /*fun getUser() {
         viewModelScope.launch(Dispatchers.IO) {
             val userData = repository.getUser("")
 
@@ -32,5 +32,5 @@ class MainViewModel(private val repository: Repository, application: Application
                 userLiveData.postValue(data)
             }
         }
-    }
+    }*/
 }

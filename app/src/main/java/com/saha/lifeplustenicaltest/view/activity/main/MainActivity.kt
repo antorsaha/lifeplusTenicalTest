@@ -31,11 +31,14 @@ class MainActivity : AppCompatActivity() {
             )
         )[MainViewModel::class.java]
 
-        viewModel.saveUser(User(name = "antor saha"))
+        /*viewModel.saveUser(User(
+            name = "antor saha"
 
-        binding.helloWorld.setOnClickListener{
+        ))*/
+
+       /* binding.helloWorld.setOnClickListener{
             viewModel.getUser()
-        }
+        }*/
 
 
 
