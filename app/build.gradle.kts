@@ -69,4 +69,5 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.1")
 
     implementation("io.michaelrocks:libphonenumber-android:8.13.35")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.20")
 }

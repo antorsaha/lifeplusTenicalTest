@@ -15,15 +15,15 @@ object AppValidator {
     fun isValidNumber(context: Context, phoneNumber: String): Boolean {
         val phoneUtil = PhoneNumberUtil.createInstance(context)
 
-        try {
-            return phoneUtil.isValidNumber(
+        return try {
+            phoneUtil.isValidNumber(
                 getPhoneNumberProtoBufferFromInternationPhoneNumber(
                     context,
                     phoneNumber
                 )
             )
         } catch (e: Exception) {
-            return false
+            false
         }
     }
 

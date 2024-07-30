@@ -10,7 +10,7 @@ import com.saha.lifeplustenicaltest.data.model.User
 
 @Dao
 interface DatabaseDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     fun saveUser(user: User)
 
     @Query("SELECT * FROM users WHERE users.userName == :userName")

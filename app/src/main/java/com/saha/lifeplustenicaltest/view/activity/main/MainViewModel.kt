@@ -16,12 +16,12 @@ class MainViewModel(private val repository: Repository, application: Application
 
     val userLiveData: MutableLiveData<User> = MutableLiveData()
 
-    fun saveUser(user: User) {
+    /*fun saveUser(user: User) {
         Log.d(TAG, "saveUser: user ${user}")
         viewModelScope.launch(Dispatchers.IO) {
             repository.saveUser(user)
         }
-    }
+    }*/
 
     /*fun getUser() {
         viewModelScope.launch(Dispatchers.IO) {

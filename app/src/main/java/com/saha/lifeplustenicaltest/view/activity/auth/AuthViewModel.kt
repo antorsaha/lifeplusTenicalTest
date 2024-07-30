@@ -34,27 +34,31 @@ class AuthViewModel(private val repository: Repository, application: Application
         )
 
         viewModelScope.launch(Dispatchers.IO) {
-            val data = repository.saveUser(user)
+            val result = repository.saveUser(user)
 
-            if (data){
-                registerResponse.postValue(ScreenState.Success(data, "Register Successful"))
-            }else{
-                registerResponse.postValue(ScreenState.Error("Error"))
+            if (result.isSuccess) {
+                registerResponse.postValue(ScreenState.Success(true, "Register Successful"))
+            } else {
+                registerResponse.postValue(
+                    ScreenState.Error(
+                        result.exceptionOrNull()?.message ?: "Error registering user"
+                    )
+                )
             }
         }
     }
 
-    fun login(){
-        viewModelScope.launch (Dispatchers.IO){
-            val data = repository.getUser()
+    fun login(userName: String, password: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val data = repository.getUser(userName)
 
             Log.d(TAG, "login: data $data")
-            if (data == null){
+            if (data == null) {
                 loginResponse.postValue(ScreenState.Error("User not found"))
-            }else{
-                if (data.password == password){
+            } else {
+                if (data.password == password) {
                     loginResponse.postValue(ScreenState.Success(data))
-                }else{
+                } else {
                     loginResponse.postValue(ScreenState.Error("Password do not match"))
                 }
             }

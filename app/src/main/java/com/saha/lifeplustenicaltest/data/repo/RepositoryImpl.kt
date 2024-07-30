@@ -21,18 +21,15 @@ class RepositoryImpl(private val myApi: MyApi) : Repository {
         }
     }*/
 
-    override suspend fun saveUser(user: User): Boolean {
-        try {
-            DatabaseHelper.saveUser(user)
-            return true
-        } catch (_: Exception) {
-            return false
-        }
+    override suspend fun saveUser(user: User) :Result<Unit> {
+
+          return DatabaseHelper.saveUser(user)
+
     }
 
-    override suspend fun getUser(): User? {
-        Log.d(TAG, "getUser: ")
-        return DatabaseHelper.getUser()
+    override suspend fun getUser(userName: String): User? {
+        Log.d(TAG, "getUser: ${DatabaseHelper.getUser(userName)}")
+        return DatabaseHelper.getUser(userName)
     }
 
     private suspend fun <T : Any> executeSafely(
