@@ -6,11 +6,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
+import com.saha.lifeplustenicaltest.BuildConfig
 import com.saha.lifeplustenicaltest.MyApplication
 import com.saha.lifeplustenicaltest.data.repo.RepositoryImpl
 import com.saha.lifeplustenicaltest.databinding.ActivityLoginBinding
 import com.saha.lifeplustenicaltest.utils.LoadingDialog
 import com.saha.lifeplustenicaltest.utils.handleScreenState
+import com.saha.lifeplustenicaltest.utils.helpers.SharedPreferenceHelper
 import com.saha.lifeplustenicaltest.utils.helpers.ViewModelInstanceHelper
 import com.saha.lifeplustenicaltest.view.activity.main.MainActivity
 
@@ -68,6 +70,13 @@ class LoginActivity : AppCompatActivity() {
             viewModel.login(userName, password)
         }
 
+        if (BuildConfig.DEBUG) {
+            binding.btnLogin.btn.setOnLongClickListener {
+                startActivity(Intent(this, MainActivity::class.java))
+                false
+            }
+        }
+
     }
 
     private fun viewModelObservers() {
@@ -76,10 +85,13 @@ class LoginActivity : AppCompatActivity() {
                 it,
                 loadingDialog,
                 successAction = { data, msg ->
+
+                    SharedPreferenceHelper.saveUserName(this, data.userName)
                     Toast.makeText(this, "login successful", Toast.LENGTH_SHORT).show()
                     startActivity(
                         Intent(this, MainActivity::class.java)
                     )
+                    finish()
                 }
             )
         }

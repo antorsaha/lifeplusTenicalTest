@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.saha.lifeplustenicaltest.data.repo.Repository
 import com.saha.lifeplustenicaltest.view.activity.auth.AuthViewModel
 import com.saha.lifeplustenicaltest.view.activity.main.MainViewModel
+import com.saha.lifeplustenicaltest.view.activity.profile.ProfileViewModel
 
 class ViewModelInstanceHelper(
     private val application: Application,
@@ -24,6 +25,11 @@ class ViewModelInstanceHelper(
             modelClass.isAssignableFrom(AuthViewModel::class.java) -> AuthViewModel(
                 repository, application
             ) as T
+
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> ProfileViewModel(
+                repository, application
+            ) as T
+
 
             else -> throw IllegalArgumentException("Unknown ViewModel class")
         }

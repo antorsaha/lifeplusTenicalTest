@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="name"
+            type="String" />
+        <variable
+            name="userName"
+            type="String" />
+        <variable
+            name="phone"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.activity.profile.ProfileActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/appBar"
+                layout="@layout/component_app_bar"
+                app:title='@{"Profile"}' />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_profile"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/ll_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/name"
+                    layout="@layout/component_text_view"
+                    app:text="@{name}"
+                    app:icon='@{@drawable/icon_user}'
+                    app:labelText="@{@string/name}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/user_name"
+                    layout="@layout/component_text_view"
+                    app:text="@{userName}"
+                    app:icon='@{@drawable/icon_user}'
+                    app:labelText="@{@string/username}" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/phone_number"
+                    layout="@layout/component_text_view"
+                    app:text="@{phone}"
+                    app:icon='@{@drawable/icon_phone}'
+                    app:labelText="@{@string/phone_number}" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

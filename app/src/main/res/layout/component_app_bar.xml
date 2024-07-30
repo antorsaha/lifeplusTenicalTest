@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <include
-                android:id="@+id/component_back_button"
+                android:id="@+id/back_button"
                 layout="@layout/component_back_button" />
         </LinearLayout>
 
