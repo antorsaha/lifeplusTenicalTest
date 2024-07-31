@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.saha.lifeplustenicaltest.data.model.User
 import com.saha.lifeplustenicaltest.data.repo.Repository
 import com.saha.lifeplustenicaltest.utils.ScreenState
+import com.saha.lifeplustenicaltest.utils.helpers.HashHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -16,7 +17,7 @@ class AuthViewModel(private val repository: Repository, application: Application
     private val TAG = "AuthViewModel"
 
     val registerResponse: MutableLiveData<ScreenState<Boolean>> = MutableLiveData()
-    val loginResponse: MutableLiveData<ScreenState<User>> = MutableLiveData()
+    val loginResponse: MutableLiveData<ScreenState<String>> = MutableLiveData()
 
     //variable from signup activity
     var name: String = ""
@@ -29,7 +30,7 @@ class AuthViewModel(private val repository: Repository, application: Application
         val user = User(
             name = name,
             userName = userName,
-            password = password,
+            password = HashHelper.getHashPassword(password),
             phoneNumber = phoneNumber
         )
 
@@ -56,8 +57,8 @@ class AuthViewModel(private val repository: Repository, application: Application
             if (data == null) {
                 loginResponse.postValue(ScreenState.Error("User not found"))
             } else {
-                if (data.password == password) {
-                    loginResponse.postValue(ScreenState.Success(data))
+                if (HashHelper.verifyPassword(password, data.password)) {
+                    loginResponse.postValue(ScreenState.Success(userName))
                 } else {
                     loginResponse.postValue(ScreenState.Error("Password do not match"))
                 }

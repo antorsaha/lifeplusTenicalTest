@@ -72,4 +72,5 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.20")
 
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("at.favre.lib:bcrypt:0.10.2")
 }

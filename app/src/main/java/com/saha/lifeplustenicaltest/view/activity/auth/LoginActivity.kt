@@ -88,7 +88,7 @@ class LoginActivity : AppCompatActivity() {
                 loadingDialog,
                 successAction = { data, msg ->
 
-                    SharedPreferenceHelper.saveUserName(this, data.userName)
+                    SharedPreferenceHelper.saveUserName(this, data)
                     Toast.makeText(this, "login successful", Toast.LENGTH_SHORT).show()
                     startActivity(
                         Intent(this, MainActivity::class.java)
