@@ -123,7 +123,7 @@ data class Show(
 data class Rating(
 
 	@field:SerializedName("average")
-	val average: Double? = null
+	val average: Double? = 0.0
 ): Serializable
 
 data class PreviousEpisode(

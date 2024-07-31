@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.saha.lifeplustenicaltest.MyApplication
 import com.saha.lifeplustenicaltest.data.repo.RepositoryImpl
 import com.saha.lifeplustenicaltest.databinding.ActivityMainBinding
 import com.saha.lifeplustenicaltest.utils.LoadingDialog
+import com.saha.lifeplustenicaltest.utils.edxtensions.trackTypingState
 import com.saha.lifeplustenicaltest.utils.handleScreenState
 import com.saha.lifeplustenicaltest.utils.helpers.ViewModelInstanceHelper
 import com.saha.lifeplustenicaltest.view.activity.profile.ProfileActivity
@@ -67,6 +69,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun listener() {
 
+        binding.search.searchEditText.trackTypingState(
+            startTyping = {
+
+            },
+            typingComplete = {
+                viewModel.searchShows(binding.search.searchEditText.text.toString())
+            }
+        )
     }
 
     private fun clickListeners() {
@@ -86,8 +96,12 @@ class MainActivity : AppCompatActivity() {
             handleScreenState(it, loadingDialog, successAction = { data, msg ->
                 loadingDialog.hide()
 
-                Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
-                searchResultAdapter.setData(data)
+                if (data.isEmpty()){
+                    //show empty view
+                    searchResultAdapter.setData(mutableListOf())
+                }else{
+                    searchResultAdapter.setData(data)
+                }
             })
         }
 
@@ -99,6 +113,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initData() {
 
-        viewModel.searchShows("girls")
+        //viewModel.searchShows("girls")
     }
 }

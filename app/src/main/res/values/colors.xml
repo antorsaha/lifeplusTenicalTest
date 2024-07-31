@@ -11,6 +11,8 @@
     <color name="secondary_button_bg">#F6F7F9</color>
     <color name="inactive_button_bg">#9C9C9C</color>
 
+    <color name="hint_color_white">#C3C3C3</color>
+
     <color name="primary_color">#3198CA</color>
 
     <color name="text_color_white">#FFFFFFFF</color>

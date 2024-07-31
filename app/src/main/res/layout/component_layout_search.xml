@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="hintText"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/search_edit_text_input_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_alpha12_white"
+        android:paddingStart="16dp"
+        android:paddingEnd="9dp" >
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/search_edit_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:endIconMinSize="24dp"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/white"
+            app:startIconDrawable="@drawable/search"
+            app:startIconTint="@color/white"
+            app:startIconMinSize="24dp"
+            app:hintEnabled="false"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:boxStrokeColor="@android:color/transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/search_edit_text"
+                style="?attr/textInputStyle"
+                android:maxLines="1"
+                android:backgroundTint="@android:color/transparent"
+                android:hint='@{hintText, default="hintText"}'
+                android:paddingVertical="12sp"
+                android:paddingStart="29dp"
+                android:textColorHint="@color/hint_color_white"
+                android:drawablePadding="5dp"
+                app:hintEnabled="true"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                tools:ignore="RtlSymmetry" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+</layout>

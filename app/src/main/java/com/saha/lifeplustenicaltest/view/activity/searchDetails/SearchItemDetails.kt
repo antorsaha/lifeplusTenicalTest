@@ -43,6 +43,10 @@ class SearchItemDetails : AppCompatActivity() {
 
     private fun clickListeners() {
 
+        binding.appBar.backButton.backButton.setOnClickListener{
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         binding.ivImdb.setOnClickListener {
             viewModel.intentData?.show?.externals?.imdb?.let {
                 AppHelper.openBrowserWithURL(this, "https://www.imdb.com/title/$it")
