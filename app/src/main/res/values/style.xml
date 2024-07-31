@@ -4,6 +4,7 @@
     <!--Text Styles-->
     <style name="title_text">
         <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/primary_text</item>
     </style>
     <style name="body_text">

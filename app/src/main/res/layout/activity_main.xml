@@ -34,12 +34,12 @@
 
             <TextView
                 style="@style/body_text_secondary"
-                android:textColor="#C6C6C6"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
                 android:layout_marginTop="4dp"
+                android:text="@string/app_name"
+                android:textColor="#C6C6C6"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -54,6 +54,12 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:id="@+id/rv_search_result"
+            android:layout_marginTop="24dp" />
 
     </LinearLayout>
 </layout>
