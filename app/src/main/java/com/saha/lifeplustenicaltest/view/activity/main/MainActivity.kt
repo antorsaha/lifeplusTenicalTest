@@ -93,8 +93,7 @@ class MainActivity : AppCompatActivity() {
     private fun viewModelObservers() {
 
         viewModel.searchResult.observe(this) {
-            handleScreenState(it, loadingDialog, successAction = { data, msg ->
-                loadingDialog.hide()
+            handleScreenState(it, successAction = { data, msg ->
 
                 if (data.isEmpty()){
                     //show empty view
