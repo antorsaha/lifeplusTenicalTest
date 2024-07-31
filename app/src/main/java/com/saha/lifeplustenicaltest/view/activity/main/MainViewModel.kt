@@ -1,12 +1,13 @@
 package com.saha.lifeplustenicaltest.view.activity.main
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.saha.lifeplustenicaltest.data.model.ResponseSearchItem
 import com.saha.lifeplustenicaltest.data.model.User
 import com.saha.lifeplustenicaltest.data.repo.Repository
+import com.saha.lifeplustenicaltest.utils.ScreenState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -15,6 +16,9 @@ class MainViewModel(private val repository: Repository, application: Application
     private val TAG = "MainViewModel"
 
     val userLiveData: MutableLiveData<User> = MutableLiveData()
+
+    val searchResult: MutableLiveData<ScreenState<MutableList<ResponseSearchItem>>> =
+        MutableLiveData()
 
     /*fun saveUser(user: User) {
         Log.d(TAG, "saveUser: user ${user}")
@@ -33,4 +37,18 @@ class MainViewModel(private val repository: Repository, application: Application
             }
         }
     }*/
+
+    fun searchShows(showName: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            searchResult.postValue(ScreenState.Loading())
+            val response = repository.searchShow(showName)
+
+            if (response.error) {
+                searchResult.postValue(ScreenState.Error(response.message))
+            } else {
+                searchResult.postValue(ScreenState.Success(response.data))
+            }
+        }
+
+    }
 }

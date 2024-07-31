@@ -2,25 +2,20 @@ package com.saha.lifeplustenicaltest.view.activity.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.doOnTextChanged
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
-import com.saha.lifeplustenicaltest.BuildConfig
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.saha.lifeplustenicaltest.MyApplication
-import com.saha.lifeplustenicaltest.R
-import com.saha.lifeplustenicaltest.data.model.User
 import com.saha.lifeplustenicaltest.data.repo.RepositoryImpl
-import com.saha.lifeplustenicaltest.databinding.ActivityLoginBinding
 import com.saha.lifeplustenicaltest.databinding.ActivityMainBinding
 import com.saha.lifeplustenicaltest.utils.LoadingDialog
 import com.saha.lifeplustenicaltest.utils.handleScreenState
-import com.saha.lifeplustenicaltest.utils.helpers.SharedPreferenceHelper
 import com.saha.lifeplustenicaltest.utils.helpers.ViewModelInstanceHelper
-import com.saha.lifeplustenicaltest.view.activity.auth.AuthViewModel
-import com.saha.lifeplustenicaltest.view.activity.auth.SignupActivity
 import com.saha.lifeplustenicaltest.view.activity.profile.ProfileActivity
+import com.saha.lifeplustenicaltest.view.activity.searchDetails.SearchItemDetails
+import com.saha.lifeplustenicaltest.view.components.adapters.SearchResultAdapter
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
@@ -28,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
     private lateinit var loadingDialog: LoadingDialog
+
+    private lateinit var searchResultAdapter: SearchResultAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,11 +45,23 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(
             this, ViewModelInstanceHelper(
-                this.application,
-                RepositoryImpl((this.application as MyApplication).myApi)
+                this.application, RepositoryImpl((this.application as MyApplication).myApi)
             )
         )[MainViewModel::class.java]
         loadingDialog = LoadingDialog(this)
+
+        searchResultAdapter = SearchResultAdapter(this@MainActivity, mutableListOf()) { data, position ->
+            startActivity(
+                Intent(this@MainActivity, SearchItemDetails::class.java).putExtras(
+                    bundleOf("detailsData" to data)
+                )
+            )
+        }
+
+        binding.rvSearchResult.apply {
+            adapter = searchResultAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity)
+        }
 
     }
 
@@ -61,16 +70,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun clickListeners() {
-        binding.ivProfile.setOnClickListener{
-            startActivity(Intent(
-                this,ProfileActivity::class.java
-            ))
+        binding.ivProfile.setOnClickListener {
+            startActivity(
+                Intent(
+                    this, ProfileActivity::class.java
+                )
+            )
         }
 
     }
 
     private fun viewModelObservers() {
 
+        viewModel.searchResult.observe(this) {
+            handleScreenState(it, loadingDialog, successAction = { data, msg ->
+                loadingDialog.hide()
+
+                Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
+                searchResultAdapter.setData(data)
+            })
+        }
 
     }
 
@@ -80,5 +99,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initData() {
 
+        viewModel.searchShows("girls")
     }
 }

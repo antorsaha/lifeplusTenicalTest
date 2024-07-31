@@ -7,6 +7,7 @@ import com.saha.lifeplustenicaltest.data.repo.Repository
 import com.saha.lifeplustenicaltest.view.activity.auth.AuthViewModel
 import com.saha.lifeplustenicaltest.view.activity.main.MainViewModel
 import com.saha.lifeplustenicaltest.view.activity.profile.ProfileViewModel
+import com.saha.lifeplustenicaltest.view.activity.searchDetails.ScheduleRideDetailsViewModel
 
 class ViewModelInstanceHelper(
     private val application: Application,
@@ -18,8 +19,7 @@ class ViewModelInstanceHelper(
         return when {
 
             modelClass.isAssignableFrom(MainViewModel::class.java) -> MainViewModel(
-                repository,
-                application
+                repository, application
             ) as T
 
             modelClass.isAssignableFrom(AuthViewModel::class.java) -> AuthViewModel(
@@ -27,6 +27,10 @@ class ViewModelInstanceHelper(
             ) as T
 
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> ProfileViewModel(
+                repository, application
+            ) as T
+
+            modelClass.isAssignableFrom(ScheduleRideDetailsViewModel::class.java) -> ScheduleRideDetailsViewModel(
                 repository, application
             ) as T
 

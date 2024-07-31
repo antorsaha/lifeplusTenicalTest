@@ -2,15 +2,26 @@ package com.saha.lifeplustenicaltest.data.network
 
 import com.google.gson.GsonBuilder
 import com.saha.lifeplustenicaltest.BuildConfig
+import com.saha.lifeplustenicaltest.data.model.ResponseSearchItem
 import com.saha.lifeplustenicaltest.utils.ApiConstants
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 interface MyApi {
+
+
+    @GET("search/shows")
+    suspend fun searchShow(
+        @Query("q") query: String
+    ): Response<MutableList<ResponseSearchItem>>
+
 
     companion object {
 

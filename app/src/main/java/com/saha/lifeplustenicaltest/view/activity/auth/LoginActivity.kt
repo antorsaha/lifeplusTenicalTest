@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
         )[AuthViewModel::class.java]
         loadingDialog = LoadingDialog(this)
 
-        binding.btnLogin.btn.isEnabled = false
+        //binding.btnLogin.btn.isEnabled = false
 
     }
 
