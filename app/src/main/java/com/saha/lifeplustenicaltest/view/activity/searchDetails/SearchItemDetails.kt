@@ -1,6 +1,7 @@
 package com.saha.lifeplustenicaltest.view.activity.searchDetails
 
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +11,7 @@ import com.saha.lifeplustenicaltest.data.model.ResponseSearchItem
 import com.saha.lifeplustenicaltest.data.repo.RepositoryImpl
 import com.saha.lifeplustenicaltest.databinding.ActivitySearchItemDetailsBinding
 import com.saha.lifeplustenicaltest.utils.edxtensions.getCompatSerializableExtra
+import com.saha.lifeplustenicaltest.utils.edxtensions.loadHtml
 import com.saha.lifeplustenicaltest.utils.edxtensions.loadImage
 import com.saha.lifeplustenicaltest.utils.helpers.AppHelper
 import com.saha.lifeplustenicaltest.utils.helpers.ViewModelInstanceHelper
@@ -87,10 +89,17 @@ class SearchItemDetails : AppCompatActivity() {
 
 
             binding.tvTitle.text = it.name
-            binding.tvDescription.text = it.summary
-            binding.tvRating.text = it.rating?.average.toString()
+            it.summary?.let { it1 -> binding.tvDescription.loadHtml(it1) }
 
-            it.image?.original?.let { it1 -> binding.ivItemImage.loadImage(it1) }
+            if (it.rating?.average != null){
+                binding.tvRating.text = it.rating.average.toString()
+                binding.tvRating.visibility = View.VISIBLE
+            }else{
+                binding.tvRating.visibility = View.GONE
+            }
+
+
+            it.image?.original?.let { it1 -> binding.ivItemImage.loadImage(it1, R.drawable.image_placeholder_icon) }
 
             if (it.externals?.imdb != null) {
                 binding.ivImdb.visibility = View.VISIBLE

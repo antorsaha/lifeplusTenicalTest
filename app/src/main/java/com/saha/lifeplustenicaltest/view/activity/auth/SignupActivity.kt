@@ -9,6 +9,7 @@ import com.saha.lifeplustenicaltest.data.repo.RepositoryImpl
 import com.saha.lifeplustenicaltest.databinding.ActivitySignupBinding
 import com.saha.lifeplustenicaltest.utils.AppValidator
 import com.saha.lifeplustenicaltest.utils.LoadingDialog
+import com.saha.lifeplustenicaltest.utils.edxtensions.showShotToast
 import com.saha.lifeplustenicaltest.utils.handleScreenState
 import com.saha.lifeplustenicaltest.utils.helpers.ViewModelInstanceHelper
 
@@ -33,8 +34,7 @@ class SignupActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(
             this, ViewModelInstanceHelper(
-                this.application,
-                RepositoryImpl((this.application as MyApplication).myApi)
+                this.application, RepositoryImpl((this.application as MyApplication).myApi)
             )
         )[AuthViewModel::class.java]
 
@@ -99,10 +99,12 @@ class SignupActivity : AppCompatActivity() {
 
     private fun viewModelObservers() {
         viewModel.registerResponse.observe(this) {
-            handleScreenState(
-                it,
-                loadingDialog
-            )
+            handleScreenState(it, loadingDialog, successAction = { data, msg ->
+                loadingDialog.hide()
+
+                showShotToast("Registration Successful")
+                finish()
+            })
         }
     }
 

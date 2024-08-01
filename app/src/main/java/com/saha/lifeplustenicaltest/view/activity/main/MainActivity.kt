@@ -2,10 +2,9 @@ package com.saha.lifeplustenicaltest.view.activity.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.saha.lifeplustenicaltest.MyApplication
@@ -24,7 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
-    private lateinit var loadingDialog: LoadingDialog
 
     private lateinit var searchResultAdapter: SearchResultAdapter
 
@@ -50,15 +48,15 @@ class MainActivity : AppCompatActivity() {
                 this.application, RepositoryImpl((this.application as MyApplication).myApi)
             )
         )[MainViewModel::class.java]
-        loadingDialog = LoadingDialog(this)
 
-        searchResultAdapter = SearchResultAdapter(this@MainActivity, mutableListOf()) { data, position ->
-            startActivity(
-                Intent(this@MainActivity, SearchItemDetails::class.java).putExtras(
-                    bundleOf("detailsData" to data)
+        searchResultAdapter =
+            SearchResultAdapter(this@MainActivity, mutableListOf()) { data, position ->
+                startActivity(
+                    Intent(this@MainActivity, SearchItemDetails::class.java).putExtras(
+                        bundleOf("detailsData" to data)
+                    )
                 )
-            )
-        }
+            }
 
         binding.rvSearchResult.apply {
             adapter = searchResultAdapter
@@ -69,14 +67,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun listener() {
 
-        binding.search.searchEditText.trackTypingState(
-            startTyping = {
+        binding.search.searchEditText.trackTypingState(startTyping = {
 
-            },
-            typingComplete = {
-                viewModel.searchShows(binding.search.searchEditText.text.toString())
-            }
-        )
+        }, typingComplete = {
+            viewModel.searchShows(binding.search.searchEditText.text.toString())
+        })
     }
 
     private fun clickListeners() {
@@ -93,15 +88,23 @@ class MainActivity : AppCompatActivity() {
     private fun viewModelObservers() {
 
         viewModel.searchResult.observe(this) {
-            handleScreenState(it, successAction = { data, msg ->
+            handleScreenState(it, loadingAction = {
+                binding.pbLoadingList.visibility = View.VISIBLE
+            }, successAction = { data, msg ->
 
-                if (data.isEmpty()){
+                binding.pbLoadingList.visibility = View.GONE
+
+                if (data.isEmpty()) {
                     //show empty view
                     searchResultAdapter.setData(mutableListOf())
-                }else{
+                } else {
                     searchResultAdapter.setData(data)
                 }
-            })
+            }, errorAction = {
+                binding.pbLoadingList.visibility = View.GONE
+            }
+
+            )
         }
 
     }

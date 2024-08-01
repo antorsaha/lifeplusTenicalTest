@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.saha.lifeplustenicaltest.R
 import com.saha.lifeplustenicaltest.data.model.ResponseSearchItem
 import com.saha.lifeplustenicaltest.databinding.ItemSearchResultBinding
 import com.saha.lifeplustenicaltest.utils.edxtensions.loadImage
@@ -26,8 +27,8 @@ class SearchResultAdapter(
             binder.tvItemTitle.text = item.show?.name
             binder.tvRating.text = item.show?.rating?.average.toString()
 
-            item.show?.image?.original?.let {
-                binder.ivItemImage.loadImage(it)
+            item.show?.image?.medium?.let {
+                binder.ivItemImage.loadImage(it, R.drawable.image_placeholder_icon)
             }
 
             binder.root.setOnClickListener {
